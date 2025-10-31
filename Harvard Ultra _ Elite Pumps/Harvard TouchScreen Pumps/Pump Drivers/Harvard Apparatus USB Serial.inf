@@ -1,0 +1,113 @@
+;
+;	Harvard Apparatus USB CDC (Serial) Driver Install
+;
+;	Device installation file for USB 2.0 COM port emulation
+;
+;	This file supports:
+;		Windows XP SP3 x86, SP2 x64
+;		Windows 7 x64 & x86
+;
+;	Copyright © 2012 by Harvard Bioscience
+;
+[Version] 
+Signature="$Windows NT$"
+DriverPackageType=PlugAndPlay
+DriverPackageDisplayName=%PKGDESC%
+Provider=%MFGNAME%
+Class=Ports
+ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
+DriverVer=02/27/2012,1.0.0227.0
+CatalogFile=usbser.cat
+
+[Manufacturer] 
+%MFGNAME%=CDCDevice,NT,NTamd64
+
+[DestinationDirs]
+DefaultDestDir = 12
+
+[CDCDevice.NT]
+%DESCRIPTION_1101%=DriverInstall,USB\VID_1fe9&PID_1101
+%DESCRIPTION_1101%=DriverInstall,USB\VID_1fe9&PID_1101&MI_00
+%DESCRIPTION_1101%=DriverInstall,USB\VID_1fe9&PID_1101&MI_02
+
+%DESCRIPTION_1102%=DriverInstall,USB\VID_1fe9&PID_1102
+%DESCRIPTION_1102%=DriverInstall,USB\VID_1fe9&PID_1102&MI_00
+%DESCRIPTION_1102%=DriverInstall,USB\VID_1fe9&PID_1102&MI_02
+
+%DESCRIPTION_1103%=DriverInstall,USB\VID_1fe9&PID_1103
+%DESCRIPTION_1103%=DriverInstall,USB\VID_1fe9&PID_1103&MI_00
+%DESCRIPTION_1103%=DriverInstall,USB\VID_1fe9&PID_1103&MI_02
+
+%DESCRIPTION_1401%=DriverInstall,USB\VID_1fe9&PID_1401
+%DESCRIPTION_1401%=DriverInstall,USB\VID_1fe9&PID_1401&MI_00
+%DESCRIPTION_1401%=DriverInstall,USB\VID_1fe9&PID_1401&MI_02
+
+%DESCRIPTION_5101%=DriverInstall,USB\VID_1fe9&PID_5101
+%DESCRIPTION_5101%=DriverInstall,USB\VID_1fe9&PID_5101&MI_00
+%DESCRIPTION_5101%=DriverInstall,USB\VID_1fe9&PID_5101&MI_02
+
+%DESCRIPTION_8101%=DriverInstall,USB\VID_1fe9&PID_8101
+%DESCRIPTION_8101%=DriverInstall,USB\VID_1fe9&PID_8101&MI_00
+%DESCRIPTION_8101%=DriverInstall,USB\VID_1fe9&PID_8101&MI_02
+
+%DESCRIPTION_0200%=DriverInstall,USB\VID_1fe9&PID_0200
+%DESCRIPTION_0200%=DriverInstall,USB\VID_1fe9&PID_0200&MI_01
+
+[CDCDevice.NTamd64]
+%DESCRIPTION_1101%=DriverInstall,USB\VID_1fe9&PID_1101
+%DESCRIPTION_1101%=DriverInstall,USB\VID_1fe9&PID_1101&MI_00
+%DESCRIPTION_1101%=DriverInstall,USB\VID_1fe9&PID_1101&MI_02
+
+%DESCRIPTION_1102%=DriverInstall,USB\VID_1fe9&PID_1102
+%DESCRIPTION_1102%=DriverInstall,USB\VID_1fe9&PID_1102&MI_00
+%DESCRIPTION_1102%=DriverInstall,USB\VID_1fe9&PID_1102&MI_02
+
+%DESCRIPTION_1103%=DriverInstall,USB\VID_1fe9&PID_1103
+%DESCRIPTION_1103%=DriverInstall,USB\VID_1fe9&PID_1103&MI_00
+%DESCRIPTION_1103%=DriverInstall,USB\VID_1fe9&PID_1103&MI_02
+
+%DESCRIPTION_1401%=DriverInstall,USB\VID_1fe9&PID_1401
+%DESCRIPTION_1401%=DriverInstall,USB\VID_1fe9&PID_1401&MI_00
+%DESCRIPTION_1401%=DriverInstall,USB\VID_1fe9&PID_1401&MI_02
+
+%DESCRIPTION_5101%=DriverInstall,USB\VID_1fe9&PID_5101
+%DESCRIPTION_5101%=DriverInstall,USB\VID_1fe9&PID_5101&MI_00
+%DESCRIPTION_5101%=DriverInstall,USB\VID_1fe9&PID_5101&MI_02
+
+%DESCRIPTION_8101%=DriverInstall,USB\VID_1fe9&PID_8101
+%DESCRIPTION_8101%=DriverInstall,USB\VID_1fe9&PID_8101&MI_00
+%DESCRIPTION_8101%=DriverInstall,USB\VID_1fe9&PID_8101&MI_02
+
+%DESCRIPTION_0200%=DriverInstall,USB\VID_1fe9&PID_0200
+%DESCRIPTION_0200%=DriverInstall,USB\VID_1fe9&PID_0200&MI_01
+
+[DriverInstall.NT]
+Include=mdmcpq.inf
+CopyFiles=FakeModemCopyFileSection
+AddReg=DriverInstall.NT.AddReg
+
+[DriverInstall.NT.AddReg]
+HKR,,DevLoader,,*ntkern
+HKR,,NTMPDriver,,usbser.sys
+HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
+
+[DriverInstall.NT.Services]
+AddService=usbser, 0x00000002, DriverServiceInst
+
+[DriverServiceInst]
+DisplayName=%SERVICE%
+ServiceType=1
+StartType=3
+ErrorControl=1
+ServiceBinary=%12%\usbser.sys 
+
+[Strings]
+MFGNAME = "Harvard Apparatus"
+DESCRIPTION_1101 = "USB serial port for Syringe Pump"
+DESCRIPTION_1102 = "USB serial port for 11 Elite Syringe Pump"
+DESCRIPTION_1103 = "USB serial port for PHD ULTRA Syringe Pump"
+DESCRIPTION_1401 = "USB serial port for Harvard Peristaltic"
+DESCRIPTION_5101 = "USB serial port for BTX Gemini"
+DESCRIPTION_8101 = "USB serial port for CMA 4000 Series"
+DESCRIPTION_0200 = "USB serial port for Syringe Pump Update"
+SERVICE = "USB CDC serial port emulation"
